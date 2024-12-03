@@ -1,0 +1,7 @@
+{
+  "name": "smart-calendar",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
