@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { Preferences } from '@capacitor/preferences';
-import { UserPhoto } from '../interfaces/common.interfaces';
+import { UserPhoto } from '../../interfaces/common.interfaces';
 import { Platform } from '@ionic/angular';
 import { Capacitor } from '@capacitor/core';
 

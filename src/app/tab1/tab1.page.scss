@@ -1,0 +1,20 @@
+.todo-week-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.todo-week {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 600px;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.todo-week-btn {
+  margin-left: 16px;
+  margin-right: 16px;
+}

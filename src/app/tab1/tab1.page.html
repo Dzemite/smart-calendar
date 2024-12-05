@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Дело недели
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,81 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">Дело недели</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <div class="todo-week-container">
+    <div>
+      <div *ngIf="toDoWeek.name" class="todo-week">
+        <p>{{ toDoWeek.name }}</p>
+        <p>Закончено на {{ toDoWeek.completed }}%</p>
+      </div>
+      <div *ngIf="!toDoWeek.name" class="todo-week">
+        <p>У вас пока еще нет дела недели...</p>
+      </div>
+    </div>
+    
+    <ion-button *ngIf="toDoWeek.name" class="todo-week-btn" id="todo-week-completed-modal" expand="block">Процент завершения</ion-button>
+    <ion-button class="todo-week-btn" id="todo-week-modal" expand="block">Обновить дело недели</ion-button>
+  </div>
+
+  <ion-modal trigger="todo-week-modal" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-buttons slot="end">
+            <ion-button (click)="confirmTodoWeek()" [strong]="true">Confirm</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-input
+            label="Дело недели"
+            labelPlacement="floating"
+            fill="outline"
+            type="text"
+            [(ngModel)]="name"
+          ></ion-input>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal trigger="todo-week-completed-modal" (willDismiss)="onWillDismissCompleted($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancelCompleted()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-buttons slot="end">
+            <ion-button
+              (click)="confirmTodoWeekCompleted()"
+              [strong]="true"
+              [disabled]="todoWeekCompleted < 0 || todoWeekCompleted > 100"
+            >Confirm</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-input
+            label="Процент завершения"
+            labelPlacement="floating"
+            fill="outline"
+            type="number"
+            min="0"
+            max="100"
+            errorText="Значение должно быть в диапазоне от 0 до 100"
+            [(ngModel)]="todoWeekCompleted"
+          ></ion-input>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>
